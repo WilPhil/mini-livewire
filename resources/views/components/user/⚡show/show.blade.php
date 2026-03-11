@@ -1,37 +1,3 @@
-<?php
-
-use Livewire\WithPagination;
-use Livewire\Attributes\Computed;
-use Livewire\Attributes\On;
-use Livewire\Component;
-use App\Models\User;
-
-new class extends Component {
-    use WithPagination;
-
-    public $query = '';
-
-    #[On('user-created')]
-    public function updatedQuery()
-    {
-        $this->resetPage();
-    }
-
-    #[Computed]
-    public function users()
-    {
-        return User::latest()
-            ->where('name', 'like', "%{$this->query}%")
-            ->paginate(6);
-    }
-
-    public function placeholder()
-    {
-        return view('livewire.placeholders.skeleton');
-    }
-};
-?>
-
 <div wire:poll class="h-full flex flex-col justify-between gap-5 mt-10">
     <h2 class="text-center text-2xl/9 font-bold tracking-tight text-gray-900">Users List</h2>
 
