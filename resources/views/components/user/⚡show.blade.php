@@ -9,19 +9,48 @@ use App\Models\User;
 new class extends Component {
     use WithPagination;
 
+    public $query = '';
+
     #[On('user-created')]
-    public function refreshUsers() {}
+    public function updatedQuery()
+    {
+        $this->resetPage();
+    }
 
     #[Computed]
     public function users()
     {
-        return User::latest()->paginate(6);
+        return User::latest()
+            ->where('name', 'like', "%{$this->query}%")
+            ->paginate(6);
+    }
+
+    public function placeholder()
+    {
+        return view('livewire.placeholders.skeleton');
     }
 };
 ?>
 
-<div class="h-full flex flex-col justify-between">
-    <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Users List</h2>
+<div wire:poll class="h-full flex flex-col justify-between gap-5 mt-10">
+    <h2 class="text-center text-2xl/9 font-bold tracking-tight text-gray-900">Users List</h2>
+
+    <form class="max-w-lg w-full self-center">
+        <label for="search" class="block mb-2.5 text-sm font-medium text-heading sr-only ">Search</label>
+        <div class="relative">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                <svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                        d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                </svg>
+            </div>
+            <input wire:model.live.debounce.250ms="query" type="search" id="search"
+                class="block w-full p-3 ps-9 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
+                placeholder="Search User(s)..." />
+        </div>
+    </form>
+
     <div>
         <ul role="list" class="divide-y divide-gray-100">
             @foreach ($this->users as $user)
@@ -41,6 +70,7 @@ new class extends Component {
             @endforeach
         </ul>
     </div>
+
     <div>
         {{ $this->users()->links() }}
     </div>
