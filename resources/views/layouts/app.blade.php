@@ -17,6 +17,7 @@
 </head>
 
 <body>
+    <x-nav-bar />
     {{ $slot }}
 
     <script src="../path/to/flowbite/dist/flowbite.min.js"></script>

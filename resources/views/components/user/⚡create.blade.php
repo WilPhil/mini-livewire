@@ -55,7 +55,6 @@ new class extends Component {
         @endif
     </div>
 
-
     <div class="mx-auto mt-4">
         <form wire:submit="createUser" action="#" method="POST" class="space-y-6">
             <div>
