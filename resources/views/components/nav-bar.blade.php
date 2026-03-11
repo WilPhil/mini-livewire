@@ -1,8 +1,8 @@
 <nav class="bg-neutral-primary fixed w-full z-20 top-0 start-0 border-b border-default">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="https://flowbite.com/docs/images/logo.svg" class="h-7" alt="Flowbite Logo" />
-            <span class="self-center text-xl text-heading font-semibold whitespace-nowrap">Flowbite</span>
+            <img src="https://files.svgcdn.io/devicon/livewire.png" class="h-7" alt="Flowbite Logo" />
+            <span class="self-center text-xl text-heading font-semibold whitespace-nowrap">Mini Livewire</span>
         </a>
         <button data-collapse-toggle="navbar-default" type="button"
             class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-body rounded-base md:hidden hover:bg-neutral-secondary-soft hover:text-heading focus:outline-none focus:ring-2 focus:ring-neutral-tertiary"
@@ -23,7 +23,7 @@
                     <x-nav-link :active="request()->routeIs('users')" href="/users">Users</x-nav-link>
                 </li>
                 <li>
-                    <x-nav-link :active="request()->routeIs('about')" href="/about">About</x-nav-link>
+                    <x-nav-link :active="request()->routeIs('contact')" href="/contact">Contact</x-nav-link>
                 </li>
             </ul>
         </div>
